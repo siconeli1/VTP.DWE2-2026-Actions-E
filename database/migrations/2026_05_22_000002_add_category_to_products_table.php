@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->date('date')->after('items');
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('category')->nullable()->after('price');
         });
     }
 
     public function down(): void
     {
-        Schema::table('events', function (Blueprint $table) {
-            $table->dropColumn('date');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('category');
         });
     }
 };

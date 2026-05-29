@@ -1,38 +1,37 @@
 LINKS DE TESTE NA EC2
 
 Aplicacao:
-http://32.194.241.171/
+http://100.54.121.237/
 
 Home:
-http://32.194.241.171/
+http://100.54.121.237/
 
 Criar evento:
-http://32.194.241.171/events/create
+http://100.54.121.237/events/create
 
 Detalhes de evento exemplo:
-http://32.194.241.171/events/1
+http://100.54.121.237/events/1
 
 Contato:
-http://32.194.241.171/contact
+http://100.54.121.237/contact
 
 Produtos:
-http://32.194.241.171/products
+http://100.54.121.237/products
 
 Busca em produtos:
-http://32.194.241.171/products?search=teste
+http://100.54.121.237/products?search=teste
 
 
 PHPMYADMIN NA EC2
 
 Link:
-http://32.194.241.171/phpmyadmin/
+http://100.54.121.237/phpmyadmin/
 
 Usuario:
 laraveluser
 
 Senha:
-usar o valor cadastrado no GitHub Secret DB_PASSWORD
-tambem esta salvo localmente em acessos.local.txt, arquivo ignorado pelo Git
+usar a senha configurada na EC2 para o usuario laraveluser
 
 Banco:
 hdcevents
@@ -51,7 +50,7 @@ Repositorio:
 https://github.com/colavitepedro/VTP.DWE2-2026-Actions-E.git
 
 EC2_HOST:
-32.194.241.171
+100.54.121.237
 
 EC2_USER:
 ubuntu
@@ -60,7 +59,7 @@ Deploy path:
 /var/www/html/hdcevents
 
 APP_URL:
-http://32.194.241.171
+http://100.54.121.237
 
 DB_CONNECTION:
 mysql
@@ -78,14 +77,13 @@ DB_USERNAME:
 laraveluser
 
 DB_PASSWORD:
-usar o valor cadastrado no GitHub Secret DB_PASSWORD
-tambem esta salvo localmente em acessos.local.txt, arquivo ignorado pelo Git
+usar a senha configurada na EC2 para o usuario laraveluser
 
 
 COMANDOS PARA CONFERIR NA EC2
 
 Entrar na EC2:
-ssh ubuntu@32.194.241.171
+ssh ubuntu@100.54.121.237
 
 Ir para o projeto:
 cd /var/www/html/hdcevents
@@ -101,27 +99,23 @@ Status das migrations:
 php artisan migrate:status
 
 Consultar eventos no MySQL:
-MYSQL_PWD='COLOCAR_AQUI_O_VALOR_DO_SECRET_DB_PASSWORD' mysql -ularaveluser -h127.0.0.1 hdcevents -e "SELECT id, title, city, date, image, items FROM events;"
+MYSQL_PWD='SENHA_DO_USUARIO_LARAVELUSER' mysql -ularaveluser -h127.0.0.1 hdcevents -e "SELECT id, title, city, date, image, items FROM events;"
 
 
 GITHUB ACTIONS
 
 O deploy roda automaticamente quando fizer push na branch main.
-Tambem da para rodar manualmente em:
-https://github.com/colavitepedro/VTP.DWE2-2026-Actions-E/actions/workflows/lamine.yml
+Conferir execucoes em:
+https://github.com/colavitepedro/VTP.DWE2-2026-Actions-E/actions/workflows/deploy-to-ec2.yml
 
 Secrets necessarios:
 EC2_SSH_KEY
-DB_PASSWORD
 
-Variables configuradas:
-EC2_HOST=32.194.241.171
-EC2_USER=ubuntu
-EC2_DEPLOY_PATH=/var/www/html/hdcevents
-APP_NAME=HDC_Events
-APP_URL=http://32.194.241.171
-DB_DATABASE=hdcevents
-DB_USERNAME=laraveluser
+Configuracoes no arquivo .github/workflows/deploy-to-ec2.yml:
+REMOTE_HOST=100.54.121.237
+REMOTE_USER=ubuntu
+TARGET=/var/www/html/hdcevents/
+APP_URL=http://100.54.121.237
 
 OBSERVACOES
 
